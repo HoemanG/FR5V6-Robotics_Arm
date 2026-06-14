@@ -1,0 +1,42 @@
+% Bilinear Interpolation for Board Positions
+\documentclass[border=10pt]{standalone}
+\usepackage{amsmath}
+\pagecolor{black!90}
+\color{white}
+\begin{document}
+
+\textbf{Board coordinate to robot position:}
+
+\[
+u = \frac{\text{col}}{8}, \quad v = \frac{\text{row}}{9}
+\quad (\text{col}=0\!-\!8,\; \text{row}=0\!-\!9)
+\]
+
+\[
+\begin{aligned}
+x &= (1-u)(1-v)\,R_1.x + u(1-v)\,R_2.x + uv\,R_3.x + (1-u)v\,R_4.x \\
+y &= (1-u)(1-v)\,R_1.y + u(1-v)\,R_2.y + uv\,R_3.y + (1-u)v\,R_4.y
+\end{aligned}
+\]
+
+\bigskip
+
+\textbf{Full pose with offsets:}
+
+\[
+\begin{bmatrix} x_{robot} \\ y_{robot} \\ z_{robot} \\ \alpha \\ \beta \\ \gamma \end{bmatrix}
+=
+\begin{bmatrix}
+x + \text{OFFSET}_X \\
+y + \text{OFFSET}_Y \\
+z \in \{\text{SAFE}_Z,\;\text{PICK}_Z,\;\text{PLACE}_Z\} \\
+\text{ROTATION}_0 \\
+\text{ROTATION}_1 \\
+\text{ROTATION}_2
+\end{bmatrix}
+\]
+
+\qquad
+$\text{SAFE}_Z = 286.869$, $\text{PICK}_Z = 181.477$, $\text{PLACE}_Z = 190.0$ (mm)
+
+\end{document}
