@@ -1,0 +1,25 @@
+% Forward Kinematics - Position Equations (simplified symbolic form)
+\documentclass[border=10pt]{standalone}
+\usepackage{amsmath}
+\pagecolor{black!90}
+\color{white}
+\begin{document}
+
+\textbf{End-effector position for FR5-V6.0:}
+
+\bigskip
+
+\[
+\begin{aligned}
+x &= \cos\theta_1\Bigl[a_2\cos\theta_2 + a_3\cos(\theta_2+\theta_3) - d_4\sin(\theta_2+\theta_3)\Bigr] \\[6pt]
+y &= \sin\theta_1\Bigl[a_2\cos\theta_2 + a_3\cos(\theta_2+\theta_3) - d_4\sin(\theta_2+\theta_3)\Bigr] \\[6pt]
+z &= d_1 + a_2\sin\theta_2 + a_3\sin(\theta_2+\theta_3) + d_4\cos(\theta_2+\theta_3)
+\end{aligned}
+\]
+
+\bigskip
+
+where:\\[4pt]
+$d_1 = 168$ mm (base offset), $a_2 = a_3 = 260$ mm (link lengths), $d_4 = 105$ mm (wrist offset)
+
+\end{document}

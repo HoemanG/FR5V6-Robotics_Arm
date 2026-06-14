@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FR5-V6.0 Technical Specifications | FPT University Robotics Lab</title>
+  <meta name="description" content="Complete technical specifications and documentation for the FAIRINO FR5-V6.0 collaborative robotic arm used in FPT University, Cantho Campus Vietnam IoT & AI Lab">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">FR</span>
+        <span>FR5V6 Documentation</span>
+      </a>
+      <nav class="nav-primary">
+        <a href="index.html" class="nav-link active">Technical Specs</a>
+        <a href="kinematics.html" class="nav-link">Kinematics</a>
+      </nav>
+      <span class="page-indicator">
+        <span class="page-current">01</span>
+        <span class="page-sep">/</span>
+        <span class="page-total">02</span>
+      </span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-eyebrow">Component Library — Cobot</span>
+          <h1 class="hero-title">
+            FAIRINO <span class="accent">FR5-V6.0</span><br>
+            Technical Report
+          </h1>
+          <p class="hero-subtitle">
+            A 6-axis collaborative robotic arm designed for industrial automation, 
+            deployed at FPT University Cantho Campus Vietnam IoT & AI Lab for 
+            xiàngqí (Chinese chess) research and manipulation tasks.
+          </p>
+          <div class="hero-meta">
+            <div class="meta-item">
+              <span class="meta-label">Payload</span>
+              <span class="meta-value">5 kg</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Reach</span>
+              <span class="meta-value">922 mm</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Axes</span>
+              <span class="meta-value">6</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Repeatability</span>
+              <span class="meta-value">±0.02 mm</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">IP Rating</span>
+              <span class="meta-value">IP54</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Weight</span>
+              <span class="meta-value">22 kg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title">General Specifications</h2>
+        </div>
+        
+        <div class="specs-grid">
+          <div class="spec-card">
+            <div class="spec-card-header">
+              <div class="spec-card-icon">J</div>
+              <span class="spec-card-title">Payload Capacity</span>
+            </div>
+            <div class="spec-card-value">5<span class="spec-card-unit"> kg</span></div>
+            <p class="spec-card-detail">Maximum load at tool center point with rated speed</p>
+          </div>
+          
+          <div class="spec-card">
+            <div class="spec-card-header">
+              <div class="spec-card-icon">R</div>
+              <span class="spec-card-title">Maximum Reach</span>
+            </div>
+            <div class="spec-card-value">922<span class="spec-card-unit"> mm</span></div>
+            <p class="spec-card-detail">Radial distance from J1 center to tool flange</p>
+          </div>
+          
+          <div class="spec-card">
+            <div class="spec-card-header">
+              <div class="spec-card-icon">S</div>
+              <span class="spec-card-title">Max Speed (TCP)</span>
+            </div>
+            <div class="spec-card-value">1.0<span class="spec-card-unit"> m/s</span></div>
+            <p class="spec-card-detail">At rated payload; affects cycle time optimization</p>
+          </div>
+          
+          <div class="spec-card">
+            <div class="spec-card-header">
+              <div class="spec-card-icon">±</div>
+              <span class="spec-card-title">Repeatability</span>
+            </div>
+            <div class="spec-card-value">0.02<span class="spec-card-unit"> mm</span></div>
+            <p class="spec-card-detail">Position repeatability per ISO 9283</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Joint Configuration</h2>
+        </div>
+        
+        <div class="joints-visual">
+          <div class="joint-item">
+            <div class="joint-marker">J1</div>
+            <span class="joint-label">Base Rotation</span>
+            <span class="joint-range">±175°</span>
+          </div>
+          <div class="joint-item">
+            <div class="joint-marker">J2</div>
+            <span class="joint-label">Shoulder</span>
+            <span class="joint-range">±130°</span>
+          </div>
+          <div class="joint-item">
+            <div class="joint-marker">J3</div>
+            <span class="joint-label">Elbow</span>
+            <span class="joint-range">±135°</span>
+          </div>
+          <div class="joint-item">
+            <div class="joint-marker">J4</div>
+            <span class="joint-label">Wrist Roll</span>
+            <span class="joint-range">±175°</span>
+          </div>
+          <div class="joint-item">
+            <div class="joint-marker">J5</div>
+            <span class="joint-label">Wrist Pitch</span>
+            <span class="joint-range">±105°</span>
+          </div>
+          <div class="joint-item">
+            <div class="joint-marker">J6</div>
+            <span class="joint-label">Wrist Twist</span>
+            <span class="joint-range">±360°</span>
+          </div>
+        </div>
+        
+        <div class="diagram-container">
+          <img src="assets/images/fr5_diagrams/fr5_joint_ranges.png" alt="Joint ranges diagram" style="max-width: 100%; border-radius: 4px;">
+          <p class="diagram-caption">Figure 1: FR5-V6.0 joint arrangement and rotation limits</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title">Physical Dimensions</h2>
+        </div>
+        
+        <div class="diagram-container">
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <img src="assets/images/fr5_diagrams/fr5_front_view.png" alt="Front view" style="max-width: 48%; border-radius: 4px;">
+            <img src="assets/images/fr5_diagrams/fr5_side_view.png" alt="Side view" style="max-width: 48%; border-radius: 4px;">
+          </div>
+          <p class="diagram-caption">Figure 2: Front and side elevation views with dimensional annotations</p>
+        </div>
+        
+        <div class="specs-table-wrapper" style="margin-top: 32px;">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>Value</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="spec-name">Total Weight</td>
+                <td class="spec-value">22 kg</td>
+                <td>Excluding controller and cable</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Footprint Diameter</td>
+                <td class="spec-value">128 mm</td>
+                <td>Mounting plate diameter</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Tool Flange</td>
+                <td class="spec-value">4 × M6</td>
+                <td>Threaded mounting holes</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Mounting Orientation</td>
+                <td class="spec-value highlight">Any</td>
+                <td>Floor, ceiling, wall, angled</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-title">Electrical & Power</h2>
+        </div>
+        
+        <div class="specs-table-wrapper">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Specification</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="spec-name">Power Supply</td>
+                <td class="spec-value">30–60 VDC</td>
+                <td>Wide input range for flexibility</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Typical Power</td>
+                <td class="spec-value">260 W</td>
+                <td>During normal operation at rated payload</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Controller Type</td>
+                <td class="spec-value">Self-developed</td>
+                <td>Real-time motor control system</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Interface</td>
+                <td class="spec-value">Teach Pendant / Web App</td>
+                <td>Dual programming interfaces</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-title">Communication Interfaces</h2>
+        </div>
+        
+        <div class="interface-list">
+          <span class="interface-tag">TCP/IP</span>
+          <span class="interface-tag">Modbus TCP/RTU</span>
+          <span class="interface-tag optional">CC-Link (optional)</span>
+          <span class="interface-tag optional">Profinet (optional)</span>
+          <span class="interface-tag optional">EtherNet/IP (optional)</span>
+          <span class="interface-tag optional">EtherCAT (optional)</span>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Ethernet-Based Protocols</h4>
+              <p>Native support for industrial Ethernet protocols enabling integration with PLCs and SCADA systems.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <path d="M9 9h6v6H9z"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Modbus Support</h4>
+              <p>Both TCP and RTU variants for legacy system compatibility and simple device connectivity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2 class="section-title">Safety Features</h2>
+        </div>
+        
+        <div class="safety-badges">
+          <span class="safety-badge">CR Certified</span>
+          <span class="safety-badge">CE Marked</span>
+          <span class="safety-badge">ISO 9001</span>
+          <span class="safety-badge">ISO 10218</span>
+          <span class="safety-badge">TS 15066</span>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4M12 16h.01"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Collaborative Operation</h4>
+              <p>Designed for safe human-robot collaboration without traditional safety fencing when properly risk-assessed.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Emergency Stop</h4>
+              <p>Hardware-based emergency stop circuit with dedicated safety inputs/outputs for integration with external safety systems.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Safety I/O</h4>
+              <p>Dedicated safety inputs and outputs for interfacing with external safety PLCs, light curtains, and safety scanners.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2 class="section-title">Environmental Ratings</h2>
+        </div>
+        
+        <div class="specs-table-wrapper">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Specification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="spec-name">IP Rating (Standard)</td>
+                <td class="spec-value highlight">IP54</td>
+                <td>Dust protected, splash resistant</td>
+              </tr>
+              <tr>
+                <td class="spec-name">IP Rating (Optional)</td>
+                <td class="spec-value">IP65</td>
+                <td>Dust tight, water jet resistant</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Operating Temperature</td>
+                <td class="spec-value">0–45 °C</td>
+                <td>Without performance degradation</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2 class="section-title">Primary Applications</h2>
+        </div>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Deburring</h4>
+              <p>Remove sharp edges and burrs from machined parts with consistent force control.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Polishing</h4>
+              <p>Surface finishing operations with adaptive compliance for uneven workpieces.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Robot Milling</h4>
+              <p>5-axis CNC-style milling with the flexibility of a 6-axis robot arm.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20V10M18 20V4M6 20v-4"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Multiaxis Cutting</h4>
+              <p>Complex cutting paths with automatic tool orientation compensation.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 3h18v18H3zM21 9H3M9 21V9"/>
+            </svg>
+            <div class="feature-content">
+              <h4>Trimming</h4>
+              <p>Excess material removal from molded or cast components.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h2 class="section-title">Workspace Envelope</h2>
+        </div>
+        
+        <!-- Workspace Envelope data table below -->
+        
+        <div class="specs-table-wrapper" style="margin-top: 32px;">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Workspace Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="spec-name">Maximum Reach Radius</td>
+                <td class="spec-value">922 mm</td>
+              </tr>
+              <tr>
+                <td class="spec-name">J1 Rotation Range</td>
+                <td class="spec-value">350° (±175°)</td>
+              </tr>
+              <tr>
+                <td class="spec-name">Working Height Range</td>
+                <td class="spec-value">~700 mm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-nav">
+        <div class="footer-nav-prev">
+          <span class="footer-nav-label">Previous</span>
+          <span class="footer-nav-title">—</span>
+        </div>
+        <div class="footer-nav-home">
+          <a href="index.html" class="footer-home-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Home
+          </a>
+        </div>
+        <div class="footer-nav-next">
+          <span class="footer-nav-label">Next</span>
+          <a href="kinematics.html" class="footer-nav-title">Kinematics →</a>
+        </div>
+      </div>
+      <div class="footer-content">
+        <p class="footer-text">
+          FR5-V6.0 Technical Documentation — FPT University, Cantho Campus Vietnam IoT & AI Lab
+        </p>
+        <p class="footer-text">
+          Specifications sourced from <a href="https://encycam.com/component-library/fairino-fr5-v6-0/" target="_blank" rel="noopener">ENCY Camera</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

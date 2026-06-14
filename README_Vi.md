@@ -1,5 +1,7 @@
 # FR5 Xiangqi Robot
 
+> **Note:** Kho lưu trữ này đóng vai trò là hướng dẫn và tài liệu tham khảo toàn diện cho mã nguồn được bảo mật của hệ thống cánh tay robot FR5V6 được sử dụng trong Phòng thí nghiệm IoT & AI tại Đại học FPT, Cơ sở Cần Thơ, Việt Nam.
+
 Hệ thống robot chơi Cờ Tướng tự động dùng camera + YOLO occupancy detection, Pygame UI, AI engine và robot manipulator. Runtime hiện được triển khai cho Fairino FR5 với gripper JODELL/ERG qua `MoveGripper`, nhưng phần cấu hình robot/camera/gripper/bàn cờ phải được setup lại cho từng bộ phần cứng.
 
 > Các thông số trong `config.py` chỉ là cấu hình mẫu của một setup đang dùng. Không xem các giá trị IP camera, offset, Z height, gripper position, teaching point hay token API là giá trị bắt buộc cho mọi robot/bàn cờ.

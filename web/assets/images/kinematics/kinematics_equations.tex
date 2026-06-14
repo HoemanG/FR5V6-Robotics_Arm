@@ -1,0 +1,264 @@
+% FR5-V6.0 Kinematics Equations
+% For rendering and placing in assets/images/kinematics/
+
+\documentclass[border=10pt, convert={png300}]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{rotating}
+\usepackage[letterspace=50]{microtype}
+
+% Theme: Dark background style (render as PNG with transparent or dark bg)
+\pagecolor{black!90}
+\color{white}
+
+\begin{document}
+
+% ==============================================================================
+% SECTION 1: DH Transformation Matrix
+% ==============================================================================
+
+\[
+\text{The homogeneous transform for link } i \text{ is:} 
+\quad ^{i-1}T_i = 
+\begin{bmatrix}
+\cos\theta_i & -\sin\theta_i \cos\alpha_i & \sin\theta_i \sin\alpha_i & a_i \cos\theta_i \\
+\sin\theta_i & \cos\theta_i \cos\alpha_i & -\cos\theta_i \sin\alpha_i & a_i \sin\theta_i \\
+0 & \sin\alpha_i & \cos\alpha_i & d_i \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\]
+
+% ==============================================================================
+% SECTION 2: FR5-V6.0 DH Parameters Table
+% ==============================================================================
+
+\[
+\begin{array}{c|cccc|c}
+\text{Joint } i & \theta_i & d_i \text{ (mm)} & a_i \text{ (mm)} & \alpha_i & \text{Range} \\ \hline
+1 & \theta_1 & 168 & 0 & 0^\circ & \pm175^\circ \\
+2 & \theta_2 - 90^\circ & 0 & 260 & +90^\circ & \pm130^\circ \\
+3 & \theta_3 & 0 & 260 & 0^\circ & \pm135^\circ \\
+4 & \theta_4 & 105 & 0 & +90^\circ & \pm175^\circ \\
+5 & \theta_5 & 0 & 0 & -90^\circ & \pm105^\circ \\
+6 & \theta_6 & 105 & 0 & 0^\circ & \pm360^\circ
+\end{array}
+\]
+
+% ==============================================================================
+% SECTION 3: Forward Kinematics Chain
+% ==============================================================================
+
+\[
+T^0_6 = T^0_1(\theta_1) \cdot T^1_2(\theta_2) \cdot T^2_3(\theta_3) \cdot T^3_4(\theta_4) \cdot T^4_5(\theta_5) \cdot T^5_6(\theta_6)
+\]
+
+\bigskip
+
+\[
+T^0_6 = 
+\begin{bmatrix}
+r_{11} & r_{12} & r_{13} & p_x \\
+r_{21} & r_{22} & r_{23} & p_y \\
+r_{31} & r_{32} & r_{33} & p_z \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+=
+\begin{bmatrix}
+& & & p_x \\
+& R_{3\times3} & & p_y \\
+& & & p_z \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\]
+
+where $R_{3\times3}$ is the rotation matrix and $\mathbf{p} = (p_x, p_y, p_z)^T$ is the end-effector position.
+
+% ==============================================================================
+% SECTION 4: Inverse Kinematics - Wrist Position
+% ==============================================================================
+
+\[
+\mathbf{P}_{wrist} = \mathbf{P}_{des} - d_6 \cdot R_{3\times3} \cdot \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+\]
+
+where $\mathbf{P}_{des}$ is the desired end-effector position and $d_6 = 105$ mm.
+
+% ==============================================================================
+% SECTION 5: Inverse Kinematics - J1 Solution
+% ==============================================================================
+
+\[
+J_1 = \text{atan2}(P_{wrist,y}, P_{wrist,x})
+\]
+
+% ==============================================================================
+% SECTION 6: Inverse Kinematics - J2/J3 Geometric Solution
+% ==============================================================================
+
+\[
+\begin{aligned}
+r &= \sqrt{P_{wrist,x}^2 + P_{wrist,y}^2} \\
+h &= P_{wrist,z} - d_1 \quad \text{where } d_1 = 168 \text{ mm} \\
+D &= \frac{r^2 + h^2 - a_2^2 - a_3^2}{2 \cdot a_2 \cdot a_3}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+\theta_3 &= \text{atan2}\left(\pm\sqrt{1-D^2}, D\right) \\
+\theta_2 &= \text{atan2}(h, r) - \text{atan2}\left(a_3\sin\theta_3, a_2 + a_3\cos\theta_3\right)
+\end{aligned}
+\]
+
+where $a_2 = a_3 = 260$ mm (upper arm and forearm lengths).
+
+% ==============================================================================
+% SECTION 7: Elbow-Up / Elbow-Down Configurations
+% ==============================================================================
+
+\[
+\text{Elbow-up: } \theta_3 > 0 \quad \Longrightarrow \quad +\sqrt{1-D^2} \text{ in } \theta_3 \text{ formula}
+\]
+
+\[
+\text{Elbow-down: } \theta_3 < 0 \quad \Longrightarrow \quad -\sqrt{1-D^2} \text{ in } \theta_3 \text{ formula}
+\]
+
+% ==============================================================================
+% SECTION 8: Wrist Orientation to J4, J5, J6
+% ==============================================================================
+
+\[
+R^3_6 = (R^0_3)^T \cdot R^0_6
+\]
+
+\medskip
+
+From $R^3_6$, extract ZYX Euler angles:
+
+\[
+\begin{aligned}
+\theta_4 &= \text{atan2}(r_{23}, r_{13}) \\
+\theta_5 &= \text{atan2}\left(\sqrt{r_{13}^2 + r_{23}^2}, r_{33}\right) \\
+\theta_6 &= \text{atan2}(r_{32}, -r_{31})
+\end{aligned}
+\]
+
+% ==============================================================================
+% SECTION 9: Jacobian Matrix
+% ==============================================================================
+
+\[
+J(\mathbf{q}) = 
+\begin{bmatrix}
+J_v \\
+J_\omega
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{\partial \mathbf{p}}{\partial \theta_1} & \cdots & \frac{\partial \mathbf{p}}{\partial \theta_6} \\
+\frac{\partial \mathbf{o}}{\partial \theta_1} & \cdots & \frac{\partial \mathbf{o}}{\partial \theta_6}
+\end{bmatrix}
+\quad (6 \times 6 \text{ matrix})
+\]
+
+\bigskip
+
+Velocity relationship:
+
+\[
+\begin{bmatrix} \mathbf{v} \\ \boldsymbol{\omega} \end{bmatrix}
+= J(\mathbf{q}) \cdot \dot{\mathbf{q}}
+\]
+
+\bigskip
+
+\[
+\dot{\mathbf{q}} = J^{-1}(\mathbf{q}) \cdot \begin{bmatrix} \mathbf{v} \\ \boldsymbol{\omega} \end{bmatrix}
+\quad \text{(when } \det(J) \neq 0 \text{)}
+\]
+
+% ==============================================================================
+% SECTION 10: Bilinear Interpolation for Board Positions
+% ==============================================================================
+
+\[
+\begin{aligned}
+x &= (1-u)(1-v)R_1.x + u(1-v)R_2.x + uv.R_3.x + (1-u)v.R_4.x \\
+y &= (1-u)(1-v)R_1.y + u(1-v)R_2.y + uv.R_3.y + (1-u)v.R_4.y
+\end{aligned}
+\]
+
+where:
+
+\[
+u = \frac{\text{col}}{8}, \quad v = \frac{\text{row}}{9}, \quad 
+\text{col} \in \{0,1,\ldots,8\}, \quad \text{row} \in \{0,1,\ldots,9\}
+\]
+
+\bigskip
+
+Full pick-and-place pose:
+
+\[
+\begin{bmatrix} x_{robot} \\ y_{robot} \\ z_{robot} \\ \alpha_{robot} \\ \beta_{robot} \\ \gamma_{robot} \end{bmatrix}
+=
+\begin{bmatrix} 
+x + \text{OFFSET}_X \\
+y + \text{OFFSET}_Y \\
+z \in \{\text{SAFE}_Z, \text{PICK}_Z, \text{PLACE}_Z\} \\
+\text{ROTATION}[0] \\
+\text{ROTATION}[1] \\
+\text{ROTATION}[2]
+\end{bmatrix}
+\]
+
+% ==============================================================================
+% SECTION 11: Singularity Condition
+% ==============================================================================
+
+\[
+\text{Singularity when:} \quad \det(J(\mathbf{q})) = 0
+\]
+
+\bigskip
+
+Common singularity configurations for FR5-V6.0:
+
+\begin{enumerate}
+    \item \textbf{Wrist singularity:} $\theta_5 = 0^\circ$ (J5 aligned with J4/J6 axis)
+    \item \textbf{Shoulder singularity:} $\theta_2 + \theta_3 = 0^\circ$ (arm fully extended or retracted)
+    \item \textbf{Elbow singularity:} $\theta_3 = \pm 180^\circ$ (collinear upper arm and forearm)
+\end{enumerate}
+
+% ==============================================================================
+% SECTION 12: Joint Limits and Speed Constraints
+% ==============================================================================
+
+\[
+\dot{\theta}_i^{\max} \leq 120^\circ/\text{s} \quad (i = 1,2,3)
+\]
+
+\[
+\dot{\theta}_i^{\max} \leq 180^\circ/\text{s} \quad (i = 4,5), \quad \dot{\theta}_6^{\max} = 360^\circ/\text{s}
+\]
+
+\[
+\text{TCP speed constraint:} \quad \|\mathbf{v}\| \leq 1.0 \text{ m/s}
+\]
+
+% ==============================================================================
+% SECTION 13: Compact FK Equations (Symbolic)
+% ==============================================================================
+
+For a 6-DOF manipulator with link lengths $a_2, a_3$ and offsets $d_1, d_4, d_6$:
+
+\[
+\begin{aligned}
+x &= \cos\theta_1\left[a_2\cos\theta_2 + a_3\cos(\theta_2+\theta_3) - d_4\sin(\theta_2+\theta_3)\right] \\
+y &= \sin\theta_1\left[a_2\cos\theta_2 + a_3\cos(\theta_2+\theta_3) - d_4\sin(\theta_2+\theta_3)\right] \\
+z &= d_1 + a_2\sin\theta_2 + a_3\sin(\theta_2+\theta_3) + d_4\cos(\theta_2+\theta_3)
+\end{aligned}
+\]
+
+\end{document}
