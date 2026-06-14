@@ -1,0 +1,40 @@
+% Inverse Kinematics - Geometric Solution for J2 and J3
+\documentclass[border=10pt]{standalone}
+\usepackage{amsmath}
+\pagecolor{black!90}
+\color{white}
+\begin{document}
+
+% Wrist position
+\[
+\mathbf{P}_{wrist} = \mathbf{P}_{des} - d_6 \cdot R \cdot \begin{bmatrix}0\\0\\1\end{bmatrix},
+\qquad d_6 = 105\text{ mm}
+\]
+
+\bigskip
+
+% J1
+\[
+J_1 = \operatorname{atan2}(P_{wrist,y},\; P_{wrist,x})
+\]
+
+\bigskip
+
+% J2 and J3 using law of cosines
+\[
+\begin{aligned}
+r &= \sqrt{P_{wrist,x}^2 + P_{wrist,y}^2} \\
+h &= P_{wrist,z} - d_1, \qquad d_1 = 168\text{ mm} \\
+D &= \frac{r^2 + h^2 - a_2^2 - a_3^2}{2\,a_2\,a_3}, \qquad a_2 = a_3 = 260\text{ mm}
+\end{aligned}
+\]
+
+\[
+\theta_3 = \operatorname{atan2}\!\left(\pm\sqrt{1-D^2},\;D\right)
+\]
+
+\[
+\theta_2 = \operatorname{atan2}(h,\;r) - \operatorname{atan2}\!\left(a_3\sin\theta_3,\;a_2 + a_3\cos\theta_3\right)
+\]
+
+\end{document}
